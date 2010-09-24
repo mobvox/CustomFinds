@@ -1,13 +1,16 @@
 # Custom Finds Behavior
 
-Behavior that enables you to config custom finds at Model in order to use with Model->find();
+Behavior that enables you to configure custom finds in your Model class in order to use with Model::find()
 
 ## Installation
+
+Git clone or copy plugin into plugins/custom_finds
+
 <pre>
 <?php 
-class Model extends AppModel{
+class AppModel extends Model{
 	//...
-	var $actsAs = array('CustomFinds');
+	var $actsAs = array('CustomFinds.CustomFinds');
 	//...
 }
 ?>
@@ -19,7 +22,8 @@ Model:
 <?php 
 class Product extends AppModel{
 	//...
-	var $actsAs = array('CustomFinds');
+	// Only necessary if you haven't initialized the behavior in your AppModel
+	var $actsAs = array('CustomFinds.CustomFinds');
 
 	var $customFinds = array(
 		'topSellers' => array(
@@ -27,7 +31,7 @@ class Product extends AppModel{
 			'contain' => array('ProductImage.source'),
 			'conditions' => array('Product.countSeller >' => 20, 'Product.is_active' => 1),
 			'recursive' => 1,
-			//All others find options
+			//All other find options
 		)
 	);
 	//...
@@ -36,6 +40,7 @@ class Product extends AppModel{
 </pre>
 Controller:
 <pre>
+<?php
 class ProductsController extends AppController{
 	//...
 	var $paginate = array(
@@ -49,5 +54,6 @@ class ProductsController extends AppController{
 		$findCount = $this->Product->find('count', array('custom' => 'topSellers'));
 	}
 	//...
-} 
+}
+?>
 </pre>
