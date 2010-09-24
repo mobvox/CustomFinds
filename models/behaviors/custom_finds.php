@@ -38,7 +38,7 @@ class CustomFindsBehavior extends ModelBehavior {
 	 */
 	function beforeFind(&$model, $query) {
 		if (isset($model->customFinds) && isset($query['custom']) && isset($model->customFinds[$query['custom']])) {
-			$query = Set::merge($model->customFinds[$query['custom']], $query);
+			$query = Set::merge($query, $model->customFinds[$query['custom']]);
 			$this->__verifyContainable($model, $query);
 			unset($query['custom']);
 			return $query;
