@@ -1,16 +1,15 @@
 <?php
-
 /**
  * CustomFinds Behavior class
  * 
- * Behavior for CakePHP that enables you to config custom
- * querys at Models.
+ * Behavior for CakePHP that enables you to configure custom
+ * queries in your Model classes.
  *
  * Licensed under The MIT License
  * Redistributions of files must retain the above copyright notice.
  *
  * @author     Ariel Patschiki, Daniel L. Pakuschewski
- * @licence    MIT License (http://www.opensource.org/licenses/mit-license.php)
+ * @license    MIT License (http://www.opensource.org/licenses/mit-license.php)
  * @copyright  Copyright 2010, MobVox Soluções Digitais.
  * @version    0.1
  */
@@ -38,7 +37,7 @@ class CustomFindsBehavior extends ModelBehavior {
 	 */
 	function beforeFind(&$model, $query) {
 		if (isset($model->customFinds) && isset($query['custom']) && isset($model->customFinds[$query['custom']])) {
-			$query = Set::merge($model->customFinds[$query['custom']], $query);
+			$query = Set::merge($query, $model->customFinds[$query['custom']]);
 			$this->__verifyContainable($model, $query);
 			unset($query['custom']);
 			return $query;
