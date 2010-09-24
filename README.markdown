@@ -7,7 +7,7 @@ Behavior that enables you to config custom finds at Model in order to use with M
 <?php 
 class Model extends AppModel{
 	//...
-	var $actsAs = array('CustomFinds');
+	var $actsAs = array('CustomFinds.CustomFinds');
 	//...
 }
 ?>
@@ -19,7 +19,7 @@ Model:
 <?php 
 class Product extends AppModel{
 	//...
-	var $actsAs = array('CustomFinds');
+	var $actsAs = array('CustomFinds.CustomFinds');
 
 	var $customFinds = array(
 		'topSellers' => array(
